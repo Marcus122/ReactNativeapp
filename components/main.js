@@ -25,7 +25,7 @@ class Main extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          This is the main screen
+          This is the main screen 
         </Text>
         <Text style={styles.welcome}>
           What is your name?
