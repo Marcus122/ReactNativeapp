@@ -7,6 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Calendar from './calendar';
+import Header from './header';
 import {connect} from 'react-redux';
 import {updateUser} from './../actions';
 
@@ -14,8 +15,11 @@ class Main extends Component {
   constructor(props){
     super(props);
     console.log("user",props.user);
+    var date = new Date();
     this.state={
-      name:props.user.user.displayName
+      name:props.user.user.displayName,
+      month:date.getMonth() + 1,
+      year:date.getFullYear()
     }
   }
   save(){
@@ -24,34 +28,41 @@ class Main extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          This is the main screen 
-        </Text>
-        <Text style={styles.welcome}>
-          What is your name?
-        </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(name) => this.setState({name})}
-          value={this.state.name}
-        />
-        <TouchableHighlight
-            onPress={this.save.bind(this)}>
-          <Text style={{color: 'blue'}}>Next</Text>
-        </TouchableHighlight>
-        <Calendar month="11" year="2016" name="Nov"/>
+      <View style={styles.mainContainer}>
+        <Header/>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            This is the main screen 
+          </Text>
+          <Text style={styles.welcome}>
+            What is your name?
+          </Text>
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(name) => this.setState({name})}
+            value={this.state.name}
+          />
+          <TouchableHighlight
+              onPress={this.save.bind(this)}>
+            <Text style={{color: 'blue'}}>Next</Text>
+          </TouchableHighlight>
+          <Calendar month={this.state.month} year={this.state.year} name="Nov"/>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  mainContainer:{
+      flex:1                  //Step 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding:10
   }
 });
 

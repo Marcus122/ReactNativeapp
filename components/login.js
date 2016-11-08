@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  Dimensions
 } from 'react-native';
 import {connect} from 'react-redux';
 import {login} from './../actions';
@@ -46,32 +47,48 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+       <TextInput style={styles.input}
         onChangeText={(email) => this.setState({email})}
         value={this.state.email}
       />
-      <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+      <TextInput style={styles.input}
         onChangeText={(password) => this.setState({password})}
         secureTextEntry={true}
         value={this.state.password}
       />
+      <Text style={{color: 'red'}}>{this.state.error ? this.state.error.message : ''}</Text>
         <TouchableHighlight
             onPress={this.login.bind(this)}>
-          <Text style={{color: 'red'}}>Login</Text>
+          <Text style={styles.login}>Login</Text>
         </TouchableHighlight>
-        <Text style={{color: 'red'}}>{this.state.error ? this.state.error.message : ''}</Text>
         <TouchableHighlight
             onPress={this.signup.bind(this)}>
-          <Text style={{color: 'red'}}>Sign up</Text>
+          <Text style={styles.signup}>Sign up</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
+var windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  login:{
+    backgroundColor:'#81c04d',
+    padding:10,
+    color:'#fff',
+    alignSelf: 'stretch',
+    width:windowWidth - 20,
+    textAlign:'center'
+  },
+  signup:{
+    color:'#81c04d',
+    padding:10,
+    backgroundColor:'#fff',
+    borderWidth:1,
+    borderColor:'#81c04d',
+    width:windowWidth - 20,
+    textAlign:'center'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -89,6 +106,11 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  input:{
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1
+  }
 });
 
 function mapStateToProps(state){

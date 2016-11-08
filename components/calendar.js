@@ -42,7 +42,7 @@ class Calendar extends Component {
           var key = String(day.getDate()) + String(day.getMonth());
           return (
               <TouchableHighlight key={key} style={styles.day}>
-                 <Text>{day.getDate()}</Text>
+                 <Text style={styles.dayText}>{day.getDate()}</Text>
              </TouchableHighlight>
           )
       });
@@ -71,11 +71,13 @@ const styles = StyleSheet.create({
       flexWrap:'wrap'
   },
   day:{
-      width:50,
       height:50,
-      alignSelf:'center',
       borderColor: 'gray', 
-      borderWidth: 1
+      borderWidth: 1,
+      width:50
+  },
+  dayText:{
+      textAlign:'center'
   }
 });
 
