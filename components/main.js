@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
+import Calendar from './calendar';
 import {connect} from 'react-redux';
 import {updateUser} from './../actions';
 
@@ -39,6 +40,7 @@ class Main extends Component {
             onPress={this.save.bind(this)}>
           <Text style={{color: 'blue'}}>Next</Text>
         </TouchableHighlight>
+        <Calendar month="11" year="2016" name="Nov"/>
       </View>
     );
   }
